@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c0t71uie5hoq"]
+
+[ext_resource type="Script" uid="uid://wggq104gyv3x" path="res://scenes/attacks/sword/heavy_slash_skill.gd" id="1_script"]
+
+[node name="HeavySlashSkill" type="Node3D" unique_id=1627467653]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("1_script")

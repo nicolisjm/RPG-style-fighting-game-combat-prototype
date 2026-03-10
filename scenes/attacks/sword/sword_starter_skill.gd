@@ -2,21 +2,25 @@ extends Node3D
 
 signal attack_finished
 
-@export var startup_duration: float = 0.0
+@export var startup_duration: float = 0.1
 @export var active_start: float = 0.1
 @export var active_end: float = 0.2
 @export var total_duration: float = 0.7
 ## Time until the player can move again for the first slash. Can be less than total_duration.
-@export var lock_duration_part0: float = 0.15
+@export var lock_duration_part0: float = 0.25
 ## Time until the player can move again for the second slash.
 @export var lock_duration_part1: float = 0.5
 @export var damage: float = 10.0
 @export var hitstun_duration: float = 0.4
 @export var knockback_force: float = 3.0
+## Tilts the slash visual toward the camera so it's visible from all aim directions (degrees)
+@export var camera_tilt: float = 0
 ## Upward launch force applied by part 1 (enables juggle)
-@export var launch_force_part1: float = 9.0
+@export var launch_force_part1: float = 0
 ## Vertical force applied when the enemy is already airborne (juggle pop-up)
 @export var juggle_force: float = 5.0
+## Brief freeze on hit for impact feel
+@export var hitstop_duration: float = 0.05
 ## Part 0 = first slash (top-right to bottom-left), Part 1 = second slash (opposite). Set by player before add_child.
 var attack_part: int = 0
 var _elapsed: float = 0.0
@@ -26,14 +30,6 @@ var _lock_emitted: bool = false
 var _visual: Area3D = null
 
 const VISUAL_SCENE := preload("res://scenes/attacks/sword/sword_starter.tscn")
-
-
-func _count_collision_shapes_on(area: Area3D) -> int:
-	var n := 0
-	for child in area.get_children():
-		if child is CollisionShape3D:
-			n += 1
-	return n
 
 
 func _set_visual_shapes_disabled(disabled: bool) -> void:
@@ -52,15 +48,13 @@ func _ready() -> void:
 	_visual = visual_node as Area3D
 	add_child(_visual)
 
-	# Configure visual transform by part: part 0 = -45° on Z, part 1 = 115° on Z
+	_visual.rotation.x = deg_to_rad(camera_tilt)
 	if attack_part == 0:
-		_visual.rotation.z = -PI / 4.0
+		_visual.rotation.z = deg_to_rad(-5)
 	else:
-		_visual.rotation.z = deg_to_rad(135.0)
+		_visual.rotation.z = deg_to_rad(175)
 
-	# Disable all collision shapes on the visual until active window
 	_set_visual_shapes_disabled(true)
-
 	_visual.body_entered.connect(_on_body_entered)
 
 
@@ -93,3 +87,5 @@ func _on_body_entered(body: Node3D) -> void:
 	if body.has_method("hit"):
 		var launch_up: float = launch_force_part1 if attack_part == 1 else 0.0
 		body.hit(damage, self, knockback_force, hitstun_duration, launch_up, juggle_force)
+		if hitstop_duration > 0.0:
+			HitstopManager.trigger(hitstop_duration)

@@ -36,6 +36,9 @@ func _physics_process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if state != CombatState.State.IDLE:
 		return
-	if not event.is_action_pressed(&"Skill 1"):
-		return
-	$SkillController.try_use_skill_1()
+	if event.is_action_pressed(&"Skill 1"):
+		$SkillController.try_use_skill_1()
+	elif event.is_action_pressed(&"Skill 2"):
+		$SkillController.try_use_skill_2()
+	elif event.is_action_pressed(&"Skill 3"):
+		$SkillController.try_use_skill_3()

@@ -18,8 +18,10 @@ signal combo_changed(count: int)
 
 var state: CombatState.State = CombatState.State.IDLE
 var hitstun_remaining: float = 0.0
+var stun_remaining: float = 0.0
 var combo_count: int = 0
 var airborne_hit_count: int = 0
+var _stunned_this_combo: bool = false
 var _kb_velocity: Vector3 = Vector3.ZERO
 var _original_color: Color = Color(0.9, 0.2, 0.2)
 var _mat: StandardMaterial3D = null
@@ -27,7 +29,6 @@ var _mat: StandardMaterial3D = null
 
 func _ready() -> void:
 	add_to_group("enemy")
-	# Duplicate material so each enemy instance is independent
 	if mesh_instance and mesh_instance.mesh.get_surface_count() > 0:
 		var src: Material = mesh_instance.get_surface_override_material(0)
 		if not src:
@@ -39,10 +40,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	# Gravity
 	_kb_velocity.y -= GRAVITY * delta
 
-	# Horizontal friction
 	var horiz := Vector3(_kb_velocity.x, 0.0, _kb_velocity.z)
 	var friction_amount := FRICTION * delta
 	if horiz.length() <= friction_amount:
@@ -57,7 +56,6 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	_kb_velocity = velocity
 
-	# State transitions
 	match state:
 		CombatState.State.HITSTUN:
 			hitstun_remaining -= delta
@@ -65,6 +63,10 @@ func _physics_process(delta: float) -> void:
 				_set_state(CombatState.State.IDLE)
 		CombatState.State.AIRBORNE:
 			if is_on_floor():
+				_set_state(CombatState.State.IDLE)
+		CombatState.State.STUNNED:
+			stun_remaining -= delta
+			if stun_remaining <= 0.0 and is_on_floor():
 				_set_state(CombatState.State.IDLE)
 
 
@@ -74,6 +76,7 @@ func _set_state(new_state: CombatState.State) -> void:
 	state = new_state
 	if state == CombatState.State.IDLE:
 		airborne_hit_count = 0
+		_stunned_this_combo = false
 		if combo_count > 0:
 			combo_count = 0
 			combo_changed.emit(0)
@@ -88,12 +91,12 @@ func _update_color() -> void:
 			_mat.albedo_color = Color(0.2, 0.9, 0.3)
 		CombatState.State.HITSTUN:
 			_mat.albedo_color = Color(0.9, 0.7, 0.2)
+		CombatState.State.STUNNED:
+			_mat.albedo_color = Color(0.2, 0.6, 0.9)
 		_:
 			_mat.albedo_color = _original_color
 
 
-## Returns a multiplier (approaching but never reaching 0) for juggle force.
-## First JUGGLE_GRACE_HITS have no penalty; each hit after multiplies by JUGGLE_DECAY_FACTOR.
 const JUGGLE_GRACE_HITS: int = 3
 const JUGGLE_DECAY_FACTOR: float = 0.9
 
@@ -104,7 +107,7 @@ func _get_juggle_decay() -> float:
 	return pow(JUGGLE_DECAY_FACTOR, penalty_hits)
 
 
-func hit(_amount: float, source: Node, knockback: float = 5.0, hitstun: float = 0.3, launch: float = 0.0, juggle: float = 0.0) -> void:
+func hit(_amount: float, source: Node, knockback: float = 5.0, hitstun: float = 0.3, launch: float = 0.0, juggle: float = 0.0, stun: float = 0.0) -> void:
 	_play_hit_sound()
 
 	var dir: Vector3 = (global_position - source.global_position)
@@ -123,6 +126,12 @@ func hit(_amount: float, source: Node, knockback: float = 5.0, hitstun: float = 
 		var juggle_scale: float = _get_juggle_decay()
 		_kb_velocity.y = juggle * juggle_scale
 		_set_state(CombatState.State.AIRBORNE)
+	elif stun > 0.0 and not _stunned_this_combo:
+		_stunned_this_combo = true
+		_kb_velocity.x = dir.x * knockback
+		_kb_velocity.z = dir.z * knockback
+		stun_remaining = stun
+		_set_state(CombatState.State.STUNNED)
 	else:
 		_kb_velocity.x = dir.x * knockback
 		_kb_velocity.z = dir.z * knockback

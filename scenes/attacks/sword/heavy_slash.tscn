@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://dk4t42q15a7mb"]
+[gd_scene format=3 uid="uid://bmuhrkctm7rui"]
 
 [ext_resource type="AudioStream" uid="uid://b4btjcgdi2avx" path="res://sfx/slashswing.mp3" id="1_0r361"]
-[ext_resource type="Script" uid="uid://c5t65doj0kaja" path="res://scenes/attacks/sword/sword_starter.gd" id="1_4jl0e"]
+[ext_resource type="Script" uid="uid://6onm3fdmnx3t" path="res://scenes/attacks/sword/heavy_slash.gd" id="1_4jl0e"]
 [ext_resource type="ArrayMesh" uid="uid://bpx5mhdmdhy30" path="res://scenes/attacks/sword/Slash1.obj" id="1_v60ss"]
 [ext_resource type="Shader" uid="uid://vc2nspgq0y5a" path="res://scenes/attacks/sword/sword_starter_shader.tres" id="2_0r361"]
 
@@ -26,25 +26,25 @@ initial_velocity_max = 0.099999994
 angular_velocity_min = -1.6093254e-05
 angular_velocity_max = -1.6093254e-05
 gravity = Vector3(0, 0, 0)
-scale_min = 2.0
-scale_max = 2.0
+scale_min = 2.5
+scale_max = 2.5
 color_ramp = SubResource("GradientTexture1D_0r361")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_v60ss"]
 size = Vector3(0.4, 0.2, 0.4)
 
-[node name="SwordStarter" type="Area3D" unique_id=368312300]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+[node name="HeavySlash" type="Area3D" unique_id=918225555]
+transform = Transform3D(2.4620194, 0, -0.43412045, 0, 2.5, 0, 0.43412045, 0, 2.4620194, 0, 0, 0)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_4jl0e")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1491223515]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=224935334]
 stream = ExtResource("1_0r361")
 volume_db = -12.0
-pitch_scale = 1.4
+pitch_scale = 0.9
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1992605272]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=506016345]
 material_override = SubResource("ShaderMaterial_v60ss")
 cast_shadow = 0
 amount = 1
@@ -52,54 +52,54 @@ lifetime = 0.6
 process_material = SubResource("ParticleProcessMaterial_htjm4")
 draw_pass_1 = ExtResource("1_v60ss")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2021693667]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1596040720]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.848317, 0, 0.15724215)
 shape = SubResource("BoxShape3D_v60ss")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=329953069]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=190358451]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.78607523, 0, 0.28500143)
 shape = SubResource("BoxShape3D_v60ss")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=310652303]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=8384321]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6746954, 0, 0.4302356)
 shape = SubResource("BoxShape3D_v60ss")
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="." unique_id=1701863711]
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="." unique_id=102574447]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5371398, 0, 0.567791)
 shape = SubResource("BoxShape3D_v60ss")
 
-[node name="CollisionShape3D5" type="CollisionShape3D" parent="." unique_id=2067997933]
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="." unique_id=2146965639]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3575536, 0, 0.6722854)
 shape = SubResource("BoxShape3D_v60ss")
 
-[node name="CollisionShape3D6" type="CollisionShape3D" parent="." unique_id=836248995]
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="." unique_id=64519510]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.048054084, 0, 0.6821696)
 shape = SubResource("BoxShape3D_v60ss")
 
-[node name="CollisionShape3D7" type="CollisionShape3D" parent="." unique_id=1114335194]
+[node name="CollisionShape3D7" type="CollisionShape3D" parent="." unique_id=469529287]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15827908, 0, 0.59071666)
 shape = SubResource("BoxShape3D_v60ss")
 
-[node name="CollisionShape3D8" type="CollisionShape3D" parent="." unique_id=793177145]
+[node name="CollisionShape3D8" type="CollisionShape3D" parent="." unique_id=253942585]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2805506, 0, 0.4799081)
 shape = SubResource("BoxShape3D_v60ss")
 
-[node name="CollisionShape3D9" type="CollisionShape3D" parent="." unique_id=1912237775]
+[node name="CollisionShape3D9" type="CollisionShape3D" parent="." unique_id=1593632267]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39900076, 0, 0.35381556)
 shape = SubResource("BoxShape3D_v60ss")
 
-[node name="CollisionShape3D10" type="CollisionShape3D" parent="." unique_id=1986881569]
+[node name="CollisionShape3D10" type="CollisionShape3D" parent="." unique_id=1720969296]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.49070466, 0, 0.19715512)
 shape = SubResource("BoxShape3D_v60ss")
 
-[node name="CollisionShape3D11" type="CollisionShape3D" parent="." unique_id=553737980]
+[node name="CollisionShape3D11" type="CollisionShape3D" parent="." unique_id=1697249261]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6080157, 0, -0.020641118)
 shape = SubResource("BoxShape3D_v60ss")
 
-[node name="CollisionShape3D12" type="CollisionShape3D" parent="." unique_id=488992045]
+[node name="CollisionShape3D12" type="CollisionShape3D" parent="." unique_id=41989352]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.69532865, 0, -0.24225834)
 shape = SubResource("BoxShape3D_v60ss")
 
-[node name="CollisionShape3D13" type="CollisionShape3D" parent="." unique_id=4446451]
+[node name="CollisionShape3D13" type="CollisionShape3D" parent="." unique_id=1273048704]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.826, 0, -0.403)
 shape = SubResource("BoxShape3D_v60ss")

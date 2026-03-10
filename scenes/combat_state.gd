@@ -7,4 +7,5 @@ enum State {
 	RECOVERY,
 	HITSTUN,
 	AIRBORNE,
+	STUNNED,
 }

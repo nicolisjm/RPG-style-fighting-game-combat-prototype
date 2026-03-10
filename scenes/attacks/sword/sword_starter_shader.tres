@@ -27,8 +27,8 @@ op_type = 2
 operator = 2
 
 [sub_resource type="Gradient" id="Gradient_546y1"]
-offsets = PackedFloat32Array(0, 0.057142857, 0.09642857, 0.27142859, 0.8464286)
-colors = PackedColorArray(0, 0, 0, 1, 0.9186046, 0.9186046, 0.9186046, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+offsets = PackedFloat32Array(0.17343174, 0.41328412, 0.52398527, 0.6494465)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_76mit"]
 gradient = SubResource("Gradient_546y1")
@@ -38,7 +38,8 @@ fill_to = Vector2(0, 1)
 texture = SubResource("GradientTexture2D_76mit")
 
 [sub_resource type="Gradient" id="Gradient_7pal5"]
-offsets = PackedFloat32Array(0.13571429, 0.36785713, 0.42857143, 0.73571426)
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.23247233, 0.3099631, 0.73571426)
 colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_gbh1k"]
@@ -61,31 +62,36 @@ default_input_values = [0, Vector2(0, 0), 1, Vector2(0.1, 1)]
 op_type = 0
 operator = 2
 
+[sub_resource type="VisualShaderNodeBillboard" id="VisualShaderNodeBillboard_7pal5"]
+keep_scale = true
+
 [resource]
 modes/cull = 2
 modes/diffuse = 3
 modes/specular = 1
-nodes/fragment/0/position = Vector2(660, 20)
+nodes/vertex/2/node = SubResource("VisualShaderNodeBillboard_7pal5")
+nodes/vertex/2/position = Vector2(-280, 140)
+nodes/fragment/0/position = Vector2(960, 300)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_7pal5")
-nodes/fragment/2/position = Vector2(260, 80)
+nodes/fragment/2/position = Vector2(440, 240)
 nodes/fragment/3/node = SubResource("VisualShaderNodeInput_t88nm")
-nodes/fragment/3/position = Vector2(-520, -40)
+nodes/fragment/3/position = Vector2(-520, 340)
 nodes/fragment/4/node = SubResource("VisualShaderNodeFloatParameter_546y1")
 nodes/fragment/4/position = Vector2(-520, 60)
 nodes/fragment/5/node = SubResource("VisualShaderNodeUVFunc_76mit")
-nodes/fragment/5/position = Vector2(20, 140)
+nodes/fragment/5/position = Vector2(120, 320)
 nodes/fragment/6/node = SubResource("VisualShaderNodeVectorOp_7pal5")
-nodes/fragment/6/position = Vector2(-180, -60)
+nodes/fragment/6/position = Vector2(-140, 280)
 nodes/fragment/10/node = SubResource("VisualShaderNodeInput_7pal5")
-nodes/fragment/10/position = Vector2(-520, 260)
+nodes/fragment/10/position = Vector2(-520, 520)
 nodes/fragment/11/node = SubResource("VisualShaderNodeTexture_546y1")
-nodes/fragment/11/position = Vector2(460, 860)
+nodes/fragment/11/position = Vector2(440, 600)
 nodes/fragment/12/node = SubResource("VisualShaderNodeUVFunc_7pal5")
-nodes/fragment/12/position = Vector2(20, 540)
+nodes/fragment/12/position = Vector2(120, 1040)
 nodes/fragment/13/node = SubResource("VisualShaderNodeVectorOp_gbh1k")
-nodes/fragment/13/position = Vector2(-180, 360)
+nodes/fragment/13/position = Vector2(-140, 1020)
 nodes/fragment/14/node = SubResource("VisualShaderNodeVectorOp_t88nm")
-nodes/fragment/14/position = Vector2(440, 360)
+nodes/fragment/14/position = Vector2(700, 280)
 nodes/fragment/15/node = SubResource("VisualShaderNodeTexture_jpcuf")
-nodes/fragment/15/position = Vector2(260, 580)
-nodes/fragment/connections = PackedInt32Array(5, 0, 2, 0, 6, 0, 5, 0, 5, 0, 11, 0, 13, 0, 12, 0, 12, 0, 15, 0, 15, 0, 14, 1, 2, 0, 14, 0, 11, 0, 0, 5, 14, 0, 0, 1, 10, 0, 5, 2, 3, 0, 6, 0, 3, 0, 13, 0, 10, 0, 12, 2)
+nodes/fragment/15/position = Vector2(440, 940)
+nodes/fragment/connections = PackedInt32Array(5, 0, 2, 0, 6, 0, 5, 0, 5, 0, 11, 0, 13, 0, 12, 0, 12, 0, 15, 0, 15, 0, 14, 1, 2, 0, 14, 0, 11, 0, 0, 5, 14, 0, 0, 1, 3, 0, 6, 0, 3, 0, 13, 0, 10, 0, 12, 2, 10, 0, 5, 2)

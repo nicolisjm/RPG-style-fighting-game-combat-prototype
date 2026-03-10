@@ -23,6 +23,10 @@ boot_splash/bg_color=Color(0.92549, 0.92549, 0.960784, 1)
 boot_splash/image="res://splash-screen.png"
 config/icon="res://icon.png"
 
+[autoload]
+
+HitstopManager="*res://scenes/hitstop_manager.gd"
+
 [input]
 
 ui_left={

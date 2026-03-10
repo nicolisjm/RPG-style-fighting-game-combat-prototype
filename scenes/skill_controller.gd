@@ -4,6 +4,8 @@ extends Node
 @export var combo_window_duration: float = 0.15
 
 const SWORD_STARTER_SKILL_SCENE := preload("res://scenes/attacks/sword/sword_starter_skill.tscn")
+const POMMEL_STRIKE_SKILL_SCENE := preload("res://scenes/attacks/sword/pommel_strike_skill.tscn")
+const HEAVY_SLASH_SKILL_SCENE := preload("res://scenes/attacks/sword/heavy_slash_skill.tscn")
 
 var _combo_window_remaining: float = 0.0
 
@@ -36,6 +38,40 @@ func try_use_skill_1() -> bool:
 		skill.attack_finished.connect(_on_attack_finished.bind(player))
 	else:
 		skill.attack_finished.connect(_on_attack_finished_part0.bind(player))
+
+	player.state = CombatState.State.STARTUP
+	return true
+
+
+func try_use_skill_2() -> bool:
+	var player: CharacterBody3D = get_parent() as CharacterBody3D
+	if not player:
+		return false
+	if player.state != CombatState.State.IDLE:
+		return false
+
+	var skill: Node = POMMEL_STRIKE_SKILL_SCENE.instantiate()
+	player.add_child(skill)
+	skill.global_position = player.global_position + Vector3(0.0, 1.0, 0.0)
+	_aim_skill_at_mouse(skill as Node3D)
+	skill.attack_finished.connect(_on_attack_finished.bind(player))
+
+	player.state = CombatState.State.STARTUP
+	return true
+
+
+func try_use_skill_3() -> bool:
+	var player: CharacterBody3D = get_parent() as CharacterBody3D
+	if not player:
+		return false
+	if player.state != CombatState.State.IDLE:
+		return false
+
+	var skill: Node = HEAVY_SLASH_SKILL_SCENE.instantiate()
+	player.add_child(skill)
+	skill.global_position = player.global_position + Vector3(0.0, 1.0, 0.0)
+	_aim_skill_at_mouse(skill as Node3D)
+	skill.attack_finished.connect(_on_attack_finished.bind(player))
 
 	player.state = CombatState.State.STARTUP
 	return true

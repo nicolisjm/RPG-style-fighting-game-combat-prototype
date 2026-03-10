@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://1pa8e20alwhc"]
+
+[ext_resource type="Script" uid="uid://doga6ef01drew" path="res://scenes/attacks/sword/pommel_strike_skill.gd" id="1_script"]
+
+[node name="PommelStrikeSkill" type="Node3D" unique_id=1563495352]
+script = ExtResource("1_script")
