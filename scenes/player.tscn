@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://jtwqnw32g458"]
+
+[ext_resource type="Script" uid="uid://c0olxlqcg1lxo" path="res://scenes/player.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://bc6ujq1gls6k1" path="res://scenes/skill_controller.gd" id="2_skill_controller"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
+radius = 0.4
+height = 1.6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_player"]
+radius = 0.4
+height = 1.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_blue"]
+albedo_color = Color(0.2, 0.4, 0.9, 1)
+
+[node name="Player" type="CharacterBody3D" unique_id=1383027291]
+script = ExtResource("1_script")
+
+[node name="SkillController" type="Node" parent="." unique_id=558277608]
+script = ExtResource("2_skill_controller")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1798704566]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+shape = SubResource("CapsuleShape3D_player")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1659173157]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+mesh = SubResource("CapsuleMesh_player")
+surface_material_override/0 = SubResource("StandardMaterial3D_blue")

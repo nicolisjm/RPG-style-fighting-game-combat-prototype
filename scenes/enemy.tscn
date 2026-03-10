@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dw112gh3fdcw3"]
+
+[ext_resource type="Script" uid="uid://7rkw7rv014xs" path="res://scenes/enemy.gd" id="1_enemy"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_enemy"]
+radius = 0.4
+height = 1.6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_enemy"]
+radius = 0.4
+height = 1.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_red"]
+albedo_color = Color(0.9, 0.2, 0.2, 1)
+
+[node name="Enemy" type="CharacterBody3D" unique_id=735768400]
+collision_layer = 2
+script = ExtResource("1_enemy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1127830906]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+shape = SubResource("CapsuleShape3D_enemy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1914261651]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+mesh = SubResource("CapsuleMesh_enemy")
+surface_material_override/0 = SubResource("StandardMaterial3D_red")
+
+[node name="HitSound" type="AudioStreamPlayer3D" parent="." unique_id=362455909]

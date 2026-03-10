@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b5en7yx8ycfph"]
+
+[ext_resource type="Script" uid="uid://bm0vlkp4usx8r" path="res://scenes/attacks/sword/sword_starter_skill.gd" id="1_skill"]
+
+[node name="SwordStarterSkill" type="Node3D" unique_id=1287712450]
+script = ExtResource("1_skill")

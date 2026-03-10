@@ -1,0 +1,25 @@
+---
+description: Godot 4.6 3D project context and official docs reference
+alwaysApply: true
+---
+
+# Godot 4.6 3D Project
+
+This is a **Godot 4.6** 3D project. Use the official stable documentation as the source of truth for APIs, nodes, and patterns.
+
+**Official docs (stable, 4.6):** https://docs.godotengine.org/en/stable/
+
+When suggesting code or architecture, prefer:
+- GDScript and the Godot 4.x API (e.g. `CharacterBody3D`, `move_and_slide()`, current input system).
+- Scene/node structure and signals as in the docs.
+- Physics and 3D nodes as documented (e.g. collision layers, `Area3D`, `RayCast3D`).
+
+## Project goal
+
+- **Prototype combat mechanics** and experiment with **simple systems**.
+- No implementation changes should be made until the user has confirmed the plan in planning mode.
+
+## Design
+
+Try to best follow this design doc in this folder: 
+docs\DESIGN.md

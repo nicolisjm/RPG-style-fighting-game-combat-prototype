@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://cdl4hvrn3nxf2"]
+
+[ext_resource type="PackedScene" uid="uid://basbm4qaiq6k5" path="res://sample/Mini Arena/Models/GLB format/column.glb" id="1_c7oak"]
+[ext_resource type="Environment" uid="uid://cm77bbr0io118" path="res://scenes/main-environment.tres" id="1_x8oc8"]
+[ext_resource type="PackedScene" uid="uid://bqxa36hkpl1hj" path="res://sample/Mini Arena/Models/GLB format/banner.glb" id="2_qihb2"]
+[ext_resource type="PackedScene" uid="uid://dr5xx7uhowqc2" path="res://sample/Mini Arena/Models/GLB format/stairs.glb" id="2_tipki"]
+[ext_resource type="PackedScene" uid="uid://gaivtq4jlu8u" path="res://sample/Mini Arena/Models/GLB format/tree.glb" id="3_lyib0"]
+[ext_resource type="PackedScene" uid="uid://dp4f8paatagro" path="res://sample/Mini Arena/Models/GLB format/bricks.glb" id="5_a3l1l"]
+[ext_resource type="PackedScene" uid="uid://nl2p4gn2t5ke" path="res://sample/Mini Arena/Models/GLB format/statue.glb" id="6_drebv"]
+[ext_resource type="PackedScene" uid="uid://bnm83q6iqa5tt" path="res://sample/Mini Arena/Models/GLB format/weapon-sword.glb" id="8_85g3d"]
+[ext_resource type="PackedScene" uid="uid://jtwqnw32g458" path="res://scenes/player.tscn" id="9_player"]
+[ext_resource type="PackedScene" uid="uid://dw112gh3fdcw3" path="res://scenes/enemy.tscn" id="10_enemy"]
+[ext_resource type="Script" uid="uid://c360pkyusbvht" path="res://scenes/main.gd" id="11_main"]
+
+[node name="Main" type="Node3D" unique_id=90039827]
+script = ExtResource("11_main")
+
+[node name="Player" parent="." unique_id=1653531819 instance=ExtResource("9_player")]
+
+[node name="Camera" type="Camera3D" parent="Player" unique_id=2071941994]
+transform = Transform3D(0.70710677, -0.45451945, 0.5416752, 0, 0.76604444, 0.6427876, -0.70710677, -0.45451945, 0.5416752, 75, 90, 75)
+environment = ExtResource("1_x8oc8")
+projection = 1
+current = true
+size = 12.0
+far = 300.0
+
+[node name="Enemy" parent="." unique_id=668245093 instance=ExtResource("10_enemy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -0.4, 2)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1507101765]
+environment = ExtResource("1_x8oc8")
+
+[node name="Floor" type="CSGBox3D" parent="." unique_id=1908979092]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.011423826)
+use_collision = true
+size = Vector3(100, 0.001, 100)
+
+[node name="View" type="Node3D" parent="." unique_id=125216101]
+transform = Transform3D(0.86602503, -0.21130913, 0.4531536, 0, 0.90630776, 0.42261803, -0.4999998, -0.36599815, 0.78488505, 0, 0.45, 0)
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=1953709309]
+transform = Transform3D(-0.7660449, -0.492404, 0.41317585, 0, 0.6427878, 0.76604426, -0.642788, 0.5868242, -0.49240378, 0, 0, 0)
+shadow_enabled = true
+shadow_opacity = 0.95
+
+[node name="Sample" type="Node3D" parent="." unique_id=827061455]
+
+[node name="weapon-sword2" parent="Sample" unique_id=434359409 instance=ExtResource("8_85g3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5339656, 0.40637833, 6.670711)
+
+[node name="stairs2" parent="Sample" unique_id=248215001 instance=ExtResource("2_tipki")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.751991, 0, 3.46556)
+
+[node name="Banner" parent="Sample" unique_id=1553376019 instance=ExtResource("2_qihb2")]
+transform = Transform3D(0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, 0.939693, 2.8685381, 0, -10.188384)
+
+[node name="Column" parent="Sample" unique_id=45182326 instance=ExtResource("1_c7oak")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9168046, 0, -9.272685)
+
+[node name="Tree" parent="Sample" unique_id=264591479 instance=ExtResource("3_lyib0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.186709, 0, -3.3946187)
+
+[node name="Tree (small)" parent="Sample" unique_id=1799403857 instance=ExtResource("3_lyib0")]
+transform = Transform3D(0.565685, 0, 0.565685, 0, 0.8, 0, -0.565685, 0, 0.565685, -8.187524, 0, -2.8946187)
+
+[node name="Bricks" parent="Sample" unique_id=723324393 instance=ExtResource("5_a3l1l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.759594, 0, 1.9389081)
+
+[node name="Statue" parent="Sample" unique_id=1712024987 instance=ExtResource("6_drebv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.41587, 0, -11.404468)

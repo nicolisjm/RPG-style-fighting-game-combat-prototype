@@ -1,0 +1,30 @@
+---
+description: Fighting game combat terminology and design patterns
+alwaysApply: true
+---
+
+# Fighting Game Combat Reference
+
+Use https://glossary.infil.net/ as the authoritative glossary for fighting game terminology.
+
+## Key terms used in this project
+
+- **Combo**: A sequence of attacks that keep the opponent in hitstun so they cannot escape. Combos in this game are free-flowing and discoverable, not fixed sequences.
+- **Hitstun**: The period after being hit where a character cannot act. While in hitstun the enemy can be hit again to continue a combo.
+- **Juggle**: Hitting an airborne opponent to keep them in the air. Each hit refreshes hitstun and can add upward force.
+- **Startup**: Frames before an attack's hitbox becomes active. The attacker is committed and vulnerable.
+- **Active (frames)**: The window where the attack's hitbox can register hits.
+- **Recovery**: Frames after active ends before the attacker can act again.
+- **Cancel**: Interrupting recovery of one move to start another (e.g. cancel-on-hit from a starter into an extender).
+- **Launcher**: An attack that sends the enemy airborne, enabling juggles.
+- **OTG (On The Ground)**: Hitting an opponent who has landed but hasn't recovered yet.
+
+## Skill roles
+
+- **Starter**: Fast, can cancel on hit into other skills.
+- **Extender**: Sets up enemy state (launch, stun) for enders.
+- **Ender**: Requires enemy state (airborne, stunned); high payoff.
+
+## State machine states
+
+Player and enemy use `CombatState.State`: IDLE, STARTUP, ACTIVE, RECOVERY, HITSTUN, AIRBORNE.
