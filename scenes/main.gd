@@ -48,6 +48,7 @@ func _on_combo_changed(count: int) -> void:
 	if count <= 0:
 		_combo_label.text = ""
 		_combo_label.scale = Vector2.ONE
+		_player.get_node("SkillController").reset_combo_tracking()
 		return
 
 	if count == 1:

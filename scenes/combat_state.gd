@@ -8,4 +8,11 @@ enum State {
 	HITSTUN,
 	AIRBORNE,
 	STUNNED,
+	DASHING,
+}
+
+enum SkillTag {
+	STARTER,
+	EXTENDER,
+	ENDER,
 }

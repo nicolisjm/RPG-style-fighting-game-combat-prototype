@@ -1,7 +1,9 @@
 extends Node3D
 
 signal attack_finished
+signal hit_confirmed
 
+@export var skill_tag: int = CombatState.SkillTag.EXTENDER
 @export var startup_duration: float = 0.1
 @export var active_start: float = 0.1
 @export var active_end: float = 0.15
@@ -74,3 +76,5 @@ func _on_body_entered(body: Node3D) -> void:
 		body.hit(damage, self, knockback_force, hitstun_duration, 0.0, 0.0, stun_duration)
 		if hitstop_duration > 0.0:
 			HitstopManager.trigger(hitstop_duration)
+	if _hit_bodies.size() == 1:
+		hit_confirmed.emit()
